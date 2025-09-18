@@ -1,0 +1,17 @@
+쓰레드가 1,2,3,4,5 가 있다면
+1,2,3,4,5 를 번갈아서 실행하는 식(별개의 코어)
+
+
+1. new thread start()
+2. 쓰레드는 Runnable(실행가능) 상태와 Running(실행)로 왔다갔다 함.
+3. sleep(), wait() 사용시 blocked됨. suspend()는 디프리케이트.
+4. stop(), resume() 도 디프리케이트
+5. sleep() 은 대기시간 이후 스스로 blocked에서 빠져나옴
+6. wait() 는 notify(), notifyAll() 후에 blocked에서 빠져나옴.
+7. wait()는 monitoring lock을 풀어버림. => 대기중인 다른 메소드 실행
+8. 공유객체의 synchronized 블럭이나 메소드가 실행될때, 다른 쓰레드가 monitoring lock 을 획득한 상태라면 이 또한 lock pool에서 블럭. => 블럭되었다.
+9. run 이 종료되면 종료, dead 상태다.
+10. runnable에서 yield() 가 호출되면 다른 쓰레드에게 자원 양보 => 다른 쓰레드가 좀더 빠르게 실행됨.
+11. join() 시 해당 쓰레드가 종료될때까지 대기.
+
+
